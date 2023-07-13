@@ -4,12 +4,14 @@ const mongoose = require("mongoose");
 const fs = require("fs");
 
 const contctRoute = require("./routes/contactRoute");
+const registrationRoute = require("./routes/registrationRoute");
 dotenv.config();
 
 const app = express();
 app.use(express.json());
 
 app.use("/user", contctRoute);
+app.use("/user", registrationRoute);
 
 app.get("/", async (req, res) => {
   try {
