@@ -78,3 +78,24 @@ exports.adminGetAllCar = async (req, res) => {
     data: allCar,
   });
 };
+
+exports.deleteCar = async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const deleteCar = await carModel.deleteOne({ _id: id });
+    if (!deleteCar)
+      return res.status(200).json({
+        status: 0,
+        msg: "car not Deleted",
+      });
+
+    return res.status(200).json({
+      status: 1,
+      msg: "car Deleted successfully",
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(400).json("Something error");
+  }
+};
