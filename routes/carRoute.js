@@ -1,8 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const { adminAddCar } = require("./../controllers/carController");
+const {
+  adminAddCar,
+  editCar,
+  adminGetAllCar,
+} = require("./../controllers/carController");
 const { adminVerify } = require("./../middlewares/tokenVerify");
 
 router.post("/add-car", adminVerify, adminAddCar);
+router.post("/get-all-car", adminVerify, adminGetAllCar);
+router.post("/edit-car/:id", adminVerify, editCar);
+router.put("/edit-car/:id", adminVerify, editCar);
+router.patch("/edit-car/:id", adminVerify, editCar);
 
 module.exports = router;

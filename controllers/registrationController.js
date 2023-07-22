@@ -51,6 +51,7 @@ exports.registration = async (req, res) => {
 
     const token = await jwt.sign(
       {
+        id: createUser._id,
         name: createUser.name,
         email: createUser.email,
         phone: createUser.phone,
