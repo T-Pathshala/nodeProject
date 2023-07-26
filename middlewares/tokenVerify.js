@@ -2,7 +2,13 @@ const jwt = require("jsonwebtoken");
 
 exports.adminVerify = async (req, res, next) => {
   try {
-    const token = req.body.token;
+    const authToken = req.headers.authorization;
+    let token = false;
+
+    if (authToken.startsWith("Bearer")) {
+      token = authToken.split(" ")[1];
+    }
+
     if (!token)
       return res.status(200).json({ status: 0, msg: "Token is required" });
 
@@ -22,7 +28,13 @@ exports.adminVerify = async (req, res, next) => {
 
 exports.userVerify = async (req, res, next) => {
   try {
-    const token = req.body.token;
+    const authToken = req.headers.authorization;
+    let token = false;
+
+    if (authToken.startsWith("Bearer")) {
+      token = authToken.split(" ")[1];
+      console.log(token);
+    }
     if (!token)
       return res.status(200).json({ status: 0, msg: "Token is required" });
 
