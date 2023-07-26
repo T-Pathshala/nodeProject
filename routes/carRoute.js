@@ -30,7 +30,7 @@ router.post("/addCarType", upload.single("image"), async (req, res) => {
   const path = req.file.path;
   const type = req.body.type;
   const price = req.body.price;
-  console.log(path, type, price);
+  console.log(path);
 });
 
 router.put("/edit-car/:id", adminVerify, editCar);

@@ -2,10 +2,11 @@ const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const fs = require("fs");
-
+const nodemailer = require("nodemailer");
 const contctRoute = require("./routes/contactRoute");
 const registrationRoute = require("./routes/registrationRoute");
 const carRoute = require("./routes/carRoute");
+const { log } = require("console");
 
 dotenv.config();
 
@@ -58,3 +59,34 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
+
+const transporter = nodemailer.createTransport({
+  host: "webextremesinternational.com",
+  secure: true,
+  secureConnection: true, // TLS requires secureConnection to be false
+  port: 465,
+  debug: true,
+  auth: {
+    user: "testing@webextremesinternational.com",
+    pass: "testing@123",
+  },
+});
+
+const info = transporter.sendMail(
+  {
+    from: '"Fred Foo 👻" <testing@webextremesinternational.com>', // sender address
+    to: "somnathpoddar615@gmail.com", // list of receivers
+    subject: "Hello ✔", // Subject line
+    text: "Hello world",
+    html: "<b>Hello world?</b>", // html body
+  },
+  (err, info) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(info);
+    }
+  }
+);
+
+console.log(info);
