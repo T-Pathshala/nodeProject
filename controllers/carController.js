@@ -1,5 +1,5 @@
 const carModel = require("../models/carModel");
-
+const carTypeModel = require("../models/carTypeModel");
 exports.adminAddCar = async (req, res) => {
   try {
     // const name = req.body.name;
@@ -97,5 +97,26 @@ exports.deleteCar = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(400).json("Something error");
+  }
+};
+
+exports.addCarType = async (req, res) => {
+  try {
+    const path = req.file.path;
+    const type = req.body.type;
+    const price = req.body.price;
+
+    const addCarTypeData = await carTypeModel.create({
+      type: type,
+      image: path,
+      price: price,
+    });
+
+    if (!addCarTypeData)
+      return res.status(200).json({ status: 0, msg: "Car type not added" });
+    return res.status(200).json({ status: 1, data: addCarTypeData });
+  } catch (err) {
+    console.log(err);
+    return res.status(400).json("Something error");
   }
 };

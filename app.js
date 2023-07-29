@@ -6,6 +6,7 @@ const nodemailer = require("nodemailer");
 const contctRoute = require("./routes/contactRoute");
 const registrationRoute = require("./routes/registrationRoute");
 const carRoute = require("./routes/carRoute");
+const userRoute = require("./routes/userRoute");
 const { log } = require("console");
 
 dotenv.config();
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use("/user", contctRoute);
 app.use("/user", registrationRoute);
 app.use("/user", carRoute);
+app.use("/user", userRoute);
 
 app.get("/", async (req, res) => {
   try {
@@ -60,33 +62,33 @@ mongoose
     console.log(err);
   });
 
-const transporter = nodemailer.createTransport({
-  host: "webextremesinternational.com",
-  secure: true,
-  secureConnection: true, // TLS requires secureConnection to be false
-  port: 465,
-  debug: true,
-  auth: {
-    user: "testing@webextremesinternational.com",
-    pass: "testing@123",
-  },
-});
+// const transporter = nodemailer.createTransport({
+//   host: "webextremesinternational.com",
+//   secure: true,
+//   secureConnection: true, // TLS requires secureConnection to be false
+//   port: 465,
+//   debug: true,
+//   auth: {
+//     user: "testing@webextremesinternational.com",
+//     pass: "testing@123",
+//   },
+// });
 
-const info = transporter.sendMail(
-  {
-    from: '"Fred Foo 👻" <testing@webextremesinternational.com>', // sender address
-    to: "somnathpoddar615@gmail.com", // list of receivers
-    subject: "Hello ✔", // Subject line
-    text: "Hello world",
-    html: "<b>Hello world?</b>", // html body
-  },
-  (err, info) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(info);
-    }
-  }
-);
+// const info = transporter.sendMail(
+//   {
+//     from: '"Fred Foo 👻" <testing@webextremesinternational.com>', // sender address
+//     to: "somnathpoddar615@gmail.com", // list of receivers
+//     subject: "Hello ✔", // Subject line
+//     text: "Hello world",
+//     html: "<b>Hello world?</b>", // html body
+//   },
+//   (err, info) => {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       console.log(info);
+//     }
+//   }
+// );
 
-console.log(info);
+// console.log(info);

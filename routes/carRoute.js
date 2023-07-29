@@ -19,6 +19,7 @@ const {
   editCar,
   adminGetAllCar,
   deleteCar,
+  addCarType,
 } = require("./../controllers/carController");
 const { adminVerify } = require("./../middlewares/tokenVerify");
 
@@ -26,12 +27,7 @@ router.post("/add-car", adminVerify, adminAddCar);
 router.post("/get-all-car", adminVerify, adminGetAllCar);
 router.post("/edit-car/:id", adminVerify, editCar);
 router.post("/delete-car/:id", adminVerify, deleteCar);
-router.post("/addCarType", upload.single("image"), async (req, res) => {
-  const path = req.file.path;
-  const type = req.body.type;
-  const price = req.body.price;
-  console.log(path);
-});
+router.post("/addCarType", upload.single("image"), addCarType);
 
 router.put("/edit-car/:id", adminVerify, editCar);
 router.patch("/edit-car/:id", adminVerify, editCar);
